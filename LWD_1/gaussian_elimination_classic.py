@@ -1,33 +1,37 @@
 from fractions import Fraction as fr
 import numpy as np
 
-def forward_move(M):
+def forward_move(M, mod_func):
     row, col = M.shape
 
-    for i in range(row):
-        if M[i][i] == 0:
+    for cur_col in range(col - 2):
+
+        #print(f"\n\nstep{cur_col}\n")
+        #print(M.astype(float))
+        mod_func(M, cur_col)
+        #print(M.astype(float))
+
+        if M[cur_col][cur_col] == 0:
+            for r in range(cur_col, row):
+                if M[r][cur_col] != 0:
+                    M[r], M[cur_col] = M[cur_col].copy(), M[r].copy()
+                    break
             
+        deviser = M[cur_col][cur_col]
 
-    for j in range(5):
-        for i in range(j + 1, 5):
-            koef = matrix[i][j] / matrix[j][j]
-            for q in range(j, 6):
-                matrix[i][q] -= (matrix[j][q] * koef)
+        for r in range(cur_col + 1, row):
+            M[r] -= M[cur_col]*M[r][cur_col] / deviser
+        # print(M.astype(float))
+    
+    return M
 
-    for i in range(5):
-        for j in range(6):
-            print(f"{matrix[i][j]:10.5f}", end=' ')
-        print()
+def backward_move(M):
+    row, col = M.shape
 
-    print()
+    solutions = np.zeros(col)
 
-    for i in range(4, -1, -1):
-        total = matrix[i][5]
+    for r in range(row - 1, -1, -1):
+        solutions[r] = M[r][col - 1] - np.dot(M[r, r + 1:], solutions[r + 1:]) 
 
-        for j in range(i + 1, 5):
-            total -= matrix[i][j] * solutions[j]
-
-        solutions[i] = total / matrix[i][i]
-
-    for i in range(5):
-        print(f"x[{i}] = {solutions[i]:10.5f}")
+    return solutions[:col - 1]
+    
