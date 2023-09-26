@@ -2,21 +2,25 @@ from fractions import Fraction as fr
 import numpy as np
 import copy
 
-def full_mod(m, cur_col):
-    M = copy.deepcopy(m)
-    n = M.shape[0]
+def full_mod(M, cur_col, arr = None):
+    row, col = M.shape
+    mr, mc = cur_col, cur_col
 
-    max_val = 0.0
-    max_row = -1
-    max_col = -1
+    print(arr)
 
-    for i in range(cur_col, n):
-        for j in range(n):
-            if abs(M[i][j]) > max_val:
-                max_val = abs(M[i][j])
-                max_row = i
-                max_col = j
+    max = np.abs(M[cur_col][cur_col])
+    for r in range(cur_col, row):
+        for c in range(cur_col, col - 1):
+            if np.abs(M[r][c]) > max:
+                max = np.abs(M[r][c])
+                mr, mc = r,c
+    
+    arr[cur_col], arr[mc] = arr[mc], arr[cur_col]
 
-        # Переставляем строки и столбцы, чтобы максимальный элемент был на диагонали
-    M[[cur_col, max_row]] = M[[max_row, cur_col]]
-    M[:, [cur_col, max_col]] = M[:, [max_col, cur_col]]
+    M[mr], M[cur_col] = M[cur_col].copy(), M[mr].copy()
+
+    M[:, [cur_col, mc]] = M[:, [mc, cur_col]]
+
+
+
+                

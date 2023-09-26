@@ -8,13 +8,13 @@ import gaussian_elimination_full_matrix_mod as gefm
 #M = init.test2()
 
 M = init.test3()
-M = gec.forward_move(M, (lambda x, z: None))
+M = gec.forward_move(M, (lambda x, y, z: None))
 c_solution = gec.backward_move(M)
 
 print(c_solution)
 
 M = init.get_initial_matrix()
-M = gec.forward_move(M, (lambda x, z: None))
+M = gec.forward_move(M, (lambda x, y, z: None))
 c_solution = gec.backward_move(M)
 
 print(c_solution)
@@ -28,8 +28,9 @@ print(c_solution)
 
 
 M = init.get_initial_matrix()
-M = gec.forward_move(M, gefm.full_mod)
-c_solution = gec.backward_move(M)
-
+arr = [i for i in range(M.shape[1] - 1)]
+M = gec.forward_move(M, gefm.full_mod, arr)
+c_solution = gec.backward_move(M, arr)
 
 print(c_solution)
+

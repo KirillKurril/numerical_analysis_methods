@@ -1,14 +1,15 @@
 from fractions import Fraction as fr
 import numpy as np
 
-def forward_move(M, mod_func):
+def forward_move(M, mod_func, arr = None):
     row, col = M.shape
 
-    for cur_col in range(col - 2):
+    for cur_col in range(col - 1):
 
         #print(f"\n\nstep{cur_col}\n")
         #print(M.astype(float))
-        mod_func(M, cur_col)
+        
+        mod_func(M, cur_col, arr)
         #print(M.astype(float))
 
         if M[cur_col][cur_col] == 0:
@@ -25,13 +26,27 @@ def forward_move(M, mod_func):
     
     return M
 
-def backward_move(M):
+def backward_move(M, arr = None):
     row, col = M.shape
 
     solutions = np.zeros(col)
 
     for r in range(row - 1, -1, -1):
-        solutions[r] = M[r][col - 1] - np.dot(M[r, r + 1:], solutions[r + 1:]) 
+        obtained = np.dot(M[r, r + 1:], solutions[r + 1:])
+        solutions[r] = (M[r][col - 1] - obtained) / M[r][r]
+
+    if arr:
+        resort(solutions, arr)
 
     return solutions[:col - 1]
+
+
+
+def resort(solutions, arr):
+    for i in range(len(solutions) - 1):
+        swap = arr.index(i)
+        a, b, c, d = solutions[swap], solutions[i], arr[swap], arr[i]
+        solutions[i], solutions[swap], arr[i], arr[swap] = a, b, c, d
+
+
     
