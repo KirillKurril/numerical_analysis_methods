@@ -48,6 +48,8 @@ def test1():
 
     M_ex = np.hstack((M,B))
 
+    print(np.round(M_ex.astype(float), 4))
+
     if np.linalg.matrix_rank(M.astype(float)) != np.linalg.matrix_rank(M_ex.astype(float)):
         print("the matrix is inconsistent")
         exit(0)
@@ -78,6 +80,8 @@ def test2():
 
     M_ex = np.hstack((M,B))
 
+    print(np.round(M_ex.astype(float), 4))
+
     if np.linalg.matrix_rank(M.astype(float)) != np.linalg.matrix_rank(M_ex.astype(float)):
         print("the matrix is inconsistent")
         exit(0)
@@ -90,13 +94,13 @@ def test2():
 
 def test3():
     M = np.array([
-        [2.,3.],
-        [4.,-5.]
+        [2.0,3.0],
+        [4.0,-5.0]
     ]) 
 
     B = np.array([
-        [7.], 
-        [-6.]
+        [7.0], 
+        [-6.0]
     ])
 
     col = M.shape[0]
@@ -107,6 +111,8 @@ def test3():
     M = np.transpose(M)
 
     M_ex = np.hstack((M,B))
+
+    print(np.round(M_ex.astype(float), 4))
 
     if np.linalg.matrix_rank(M.astype(float)) != np.linalg.matrix_rank(M_ex.astype(float)):
         print("the matrix is inconsistent")
@@ -127,6 +133,8 @@ def get_initial_matrix():
     M = np.transpose(M)
 
     M_ex = np.hstack((M,b))
+
+    #print(np.round(M_ex.astype(float), 4))
 
     if np.linalg.matrix_rank(M.astype(float)) != np.linalg.matrix_rank(M_ex.astype(float)):
         print("the matrix is inconsistent")

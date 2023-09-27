@@ -18,13 +18,14 @@ M = init.get_initial_matrix()
 M = gec.forward_move(M, (lambda x, y, z: None))
 c_solution = gec.backward_move(M)
 
+print(c_solution.astype(float))
 print(np.round(c_solution.astype(float), 4))
 
 M = init.get_initial_matrix()
 M = gec.forward_move(M, gecm.col_mod)
 c_solution = gec.backward_move(M)
 
-
+print(c_solution.astype(float))
 print(np.round(c_solution.astype(float), 4))
 
 
@@ -33,5 +34,6 @@ arr = [i for i in range(M.shape[1] - 1)]
 M = gec.forward_move(M, gefm.full_mod, arr)
 c_solution = gec.backward_move(M, arr)
 
+print(c_solution.astype(float))
 print(np.round(c_solution.astype(float), 4))
 
