@@ -30,13 +30,13 @@ k = 5
 
 def test1():
     M = np.array([
-        [2,3],
-        [4,6]
+        [fr(2),fr(3)],
+        [fr(4),fr(6)]
     ]) 
 
     B = np.array([
-        [7], 
-        [14]
+        [fr(7)], 
+        [fr(14)]
     ])
 
     col = M.shape[0]

@@ -6,8 +6,6 @@ def full_mod(M, cur_col, arr = None):
     row, col = M.shape
     mr, mc = cur_col, cur_col
 
-    print(arr)
-
     max = np.abs(M[cur_col][cur_col])
     for r in range(cur_col, row):
         for c in range(cur_col, col - 1):

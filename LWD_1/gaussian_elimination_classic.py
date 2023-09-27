@@ -29,11 +29,12 @@ def forward_move(M, mod_func, arr = None):
 def backward_move(M, arr = None):
     row, col = M.shape
 
-    solutions = np.zeros(col)
+    solutions = np.zeros(col, dtype=fr)
 
     for r in range(row - 1, -1, -1):
         obtained = np.dot(M[r, r + 1:], solutions[r + 1:])
-        solutions[r] = (M[r][col - 1] - obtained) / M[r][r]
+        a = fr(M[r][col - 1] - obtained)
+        solutions[r] = a/M[r][r]
 
     if arr:
         resort(solutions, arr)
