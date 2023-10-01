@@ -1,7 +1,8 @@
-from fractions import Fraction as fr
 import numpy as np
 
-Accuracy = 1e-5
+Accuracy = 1e-4
+
+Limit_number_of_iterations = 50
 
 C = np.array([
         [0.01, 0, -0.02, 0, 0],
@@ -31,45 +32,47 @@ b = np.array([
 k = 5
 
 
-def test1():
+def test1(): #Ошибка из-за нулевого диагонального элемента
     M = np.array([
-        [],
-        []
+        [0, 1, 2], 
+        [3, 4, 5], 
+        [6, 7, 8]
     ]) 
 
     B = np.array([
-        [], 
-        []
+        [1], 
+        [2],
+        [3]
     ])
 
     return (M, B)
 
-
-
-def test2():
+def test2(): #Потенциальная расходимость итерационного процесса
     M = np.array([
-        [],
-        []
+        [2, 1, 1], 
+        [1, 2, 1], 
+        [1, 1, 2]
     ]) 
 
     B = np.array([
-        [], 
-        []
+        [1], 
+        [2],
+        [3]
     ])
 
     return (M, B)
 
-
-
-def test3():
+def test3(): #Ошибка из-за расходимости последовательности
     M = np.array([
-        [],
-        []
+        [1, 2, 3],
+        [4, 5, 6], 
+        [7, 8, 9]
     ]) 
 
     B = np.array([
-        [], 
-        []
+        [1], 
+        [2],
+        [3]
     ])
 
     return (M, B)
@@ -93,5 +96,3 @@ def get_initial_matrix():
         print("the matrix has an infinite number of solutions")
         exit(0)
     return (M, b)
-
-

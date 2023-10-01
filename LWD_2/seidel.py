@@ -1,14 +1,19 @@
 import numpy as np
 from initial_data import Accuracy as ac 
+from initial_data import Limit_number_of_iterations as il
 import secondary_functions as sf
 
 def seidel(A, b):
+
+    print("\n---------------------------Метод Зейделя---------------------------\n")
+
     n = A.shape[0]
+
     for i in range(n):
 
         if A[i, i] == 0.0:
-            print("Возникла ошибка:\n"
-                  + "Обнаружен нулевой диагональный элемент!")
+            print("\nВозникла ошибка:\n"
+                  + "Обнаружен нулевой диагональный элемент!\n")
             return sf.err(n)
 
     transition_matrix = sf.get_transition_matrix(A)
@@ -21,8 +26,7 @@ def seidel(A, b):
     deltax = ac
     deltaf = ac
 
-    print("\n---------------------------Метод Зейделя---------------------------\n")
-    print("Промежуточные результаты метода Зейделя:\n")
+    print("\nПромежуточные результаты метода Зейделя:\n")
 
     while deltax + deltaf > ac:
         oldx = x.copy()
@@ -37,9 +41,9 @@ def seidel(A, b):
         deltax = np.absolute((x - oldx)).max()
         deltaf = np.absolute((A.dot(x) - b)).max()
 
-        if not np.isfinite(deltax + deltaf):
-            print("Возникла ошибка:\n"
-                  + f"Последовательность {x} расходится")
+        if not np.isfinite(deltax + deltaf) or count > il:
+            print("\nВозникла ошибка:\n"
+                  + f"Последовательность расходится\n")
             return sf.err(n)
         
         for cur in range(len(x)):

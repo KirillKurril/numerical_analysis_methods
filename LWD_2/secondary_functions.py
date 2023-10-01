@@ -26,13 +26,15 @@ def get_transition_matrix(A):
 def output(A, x, b):
     np.set_printoptions(suppress=True, precision=4, floatmode="fixed")
     print(f"A = \n{A}\n"
-        +f"x = \n{x.T}\n"
-        +f"Проверка: b = \n{b.T}\n{A.dot(x).T}")
+         + f"b = \n{b.T}\n"
+         + f"x = \n{x.T}\n")
+    if not np.isnan(x).any():
+            print(f"Проверка: b = \n{b.T}\n{A.dot(x).T}")
 
 
 
 
-def test(method):
-    (A, b) = init.get_initial_matrix()
+def test(method, initial):
+    (A, b) = initial()
     x = method(A.copy(), b.copy())
     output(A, x, b)
