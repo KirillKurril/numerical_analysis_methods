@@ -2,6 +2,7 @@ import numpy as np
 from initial_data import Accuracy as ac 
 from initial_data import Limit_number_of_iterations as il
 import secondary_functions as sf
+from fractions import Fraction as fr
 
 def seidel(A, b):
 

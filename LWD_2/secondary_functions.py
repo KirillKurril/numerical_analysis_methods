@@ -1,5 +1,6 @@
 import numpy as np
 import initial_data as init
+from fractions import Fraction as fr
 
 
 def err(n):
@@ -24,7 +25,7 @@ def get_transition_matrix(A):
     return alpha
 
 def output(A, x, b):
-    np.set_printoptions(suppress=True, precision=4, floatmode="fixed")
+    np.set_printoptions(suppress=True, precision=6, floatmode="fixed")
     print(f"A = \n{A}\n"
          + f"b = \n{b.T}\n"
          + f"x = \n{x.T}\n")

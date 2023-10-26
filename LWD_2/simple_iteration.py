@@ -2,6 +2,7 @@ import numpy
 from initial_data import Accuracy as ac 
 import secondary_functions as sf
 from initial_data import Limit_number_of_iterations as il
+from fractions import Fraction as fr
 
 
 def simple_iteration(A, b):

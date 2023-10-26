@@ -21,3 +21,6 @@ sf.test(sd, init.test2)
 print("\nВходные данные теста 3\n")
 sf.test(simp, init.test3)
 sf.test(sd, init.test3)
+
+
+
