@@ -6,9 +6,10 @@ def get_sturm_row(y):
     sturm_row.append(y)
     sturm_row.append(y.diff(x))
     n = 2
-    while(sturm_row[n - 1].degree() != 0):
+    while sturm_row[n - 1].degree() != 0:
         reminder = - sturm_row[n - 2] % sturm_row[n - 1]
         sturm_row.append(reminder)
+        n += 1
     return sturm_row
 
 def get_number_of_sign_changes(sturm_row, border):
@@ -16,7 +17,7 @@ def get_number_of_sign_changes(sturm_row, border):
 
     boundary_values = []
     for polynomial in sturm_row:
-        boundary_values.append(eval(polynomial))
+        boundary_values.append(eval(str(polynomial.as_expr())))
     counter = 0
 
     is_positiv = boundary_values[0] >= 0
@@ -30,10 +31,10 @@ def get_number_of_sign_changes(sturm_row, border):
 
 
 
-def sturm(init):
-    sturm_row = get_sturm_row(init[0])
-    right_changes = get_number_of_sign_changes(sturm_row, init[1][0])
-    left_changes = get_number_of_sign_changes(sturm_row, init[1][1])
+def sturm(equation, interval):
+    sturm_row = get_sturm_row(equation)
+    right_changes = get_number_of_sign_changes(sturm_row, interval[0])
+    left_changes = get_number_of_sign_changes(sturm_row, interval[1])
     root_count = abs(right_changes - left_changes)
     return root_count
 
