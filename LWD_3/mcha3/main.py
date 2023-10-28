@@ -2,7 +2,7 @@ import numpy as np
 
 import task
 from nonlinear_methods import newton, secant, bisection
-from sturms_row import get_root_intervals, get_sturm_row
+from sturms_row import get_intervals, get_sturm_row
 from accuracy import check_accuracy
 
 
@@ -13,7 +13,7 @@ def main():
 
     print(f'Equation is \n y={y}')
     print('#' * 50)
-    intervals = get_root_intervals(get_sturm_row(y), interval)
+    intervals = get_intervals(get_sturm_row(y), interval)
     print(f"\nIntervals with 1 root: {[x for x in intervals]}\n")
     roots = []
     for inter in intervals:

@@ -5,7 +5,7 @@ x = symbols('x')
 
 def validity_check(y):
     if(y.degree() < 2):
-        raise ValueError("equation is not nonlinear")
+        raise ValueError("Equation is not nonlinear")
 
     coefficients = y.all_coeffs()
     if dalambert_criterion(coefficients):
@@ -32,3 +32,6 @@ def get_condition_init():
     validity_check()
 
     return (y, interval)
+
+
+#x^3 + 9.57496*x^2 + -243.672*x + 773.65
