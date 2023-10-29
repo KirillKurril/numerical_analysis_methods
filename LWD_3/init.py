@@ -11,25 +11,29 @@ a = fr(9.57496)
 b = fr(-243.672)
 c = fr(773.65)
 
+test1 = x**2 + 4
+test2 = 2*x
+given = x ** 3 + a * x ** 2 + b * x + c
+
 def validity_check(y):
     if(y.degree() < 2):
-        raise ValueError("Equation is not nonlinear")
+        raise Exception("Equation is not nonlinear")
 
     coefficients = y.all_coeffs()
     if dalambert_criterion(coefficients):
         print("\n\nWarning! The polynomial can have complex roots!\n\n")
 
 def dalambert_criterion(coefficients):
-    ratio1 = coefficients[-2] / coefficients[-1]
-    ratio2 = coefficients[-3] / coefficients[-2]
+    for i in range(len(coefficients) - 1):
+        if coefficients[i] == 0 or coefficients[i + 1] == 0:
+            return True  
+        ratio = coefficients[i + 1] / coefficients[i]
+        if ratio > 0:
+            return True  
+    return False
     
-    if ratio1 > 0 or ratio2 > 0:
-        return False  # Полином не удовлетворяет критерию Даламбера
-    else:
-        return True  # Полином может иметь комплексные корни
-
 def get_initial_values():
-    y = x ** 3 + a * x ** 2 + b * x + c
+    y = given
    
     validity_check(Poly(y))
 
