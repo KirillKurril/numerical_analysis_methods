@@ -1,10 +1,18 @@
 import numpy as np
-
 import task
-from nonlinear_methods import newton, secant, bisection
+from nonlinear_methods import newton, chord, bisection
 from sturms_row import get_intervals, get_sturm_row
-from accuracy import check_accuracy
+PRECISION = 1e-5
 
+def check_accuracy(interval, my_roots, numpy_roots):
+    numpy_roots = sorted(list(filter(lambda x: interval[0] <= x <= interval[1], numpy_roots)))
+    my_roots =  sorted(my_roots)
+    for i in range(len(my_roots)):
+        if (abs(numpy_roots[i] - my_roots[i])) >= PRECISION:
+            return False
+        else:
+            print(f"|{numpy_roots[i]} - {my_roots[i]}| < {PRECISION}")
+    return True
 
 def main():
     y = task.y
@@ -26,7 +34,7 @@ def main():
               f'Iteration: {bisect_ans[1]}')
 
         print('#' * 50)
-        secant_ans = secant(y, inter)
+        secant_ans = chord(y, inter)
         print(f'**** Solving with Secant method ****\n'
               f'ROOT: {secant_ans[0]}\n'
               f'Iteration: {secant_ans[1]}')
@@ -44,7 +52,7 @@ def main():
     print(f'**** Solving with Numpy ****\n'
           f'ROOTS: {correct_roots}\n')
 
-    print(check_accuracy(sorted(list(filter(lambda x: interval[0] <= x <= interval[1], correct_roots))), sorted(roots)))
+    check_accuracy(interval, roots, correct_roots)
 
 if __name__ == '__main__':
     main()

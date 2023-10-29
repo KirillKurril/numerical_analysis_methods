@@ -1,7 +1,15 @@
 from fractions import Fraction as fr
 from sympy import Poly, symbols
 
+
 x = symbols('x')
+
+PRECISION = 1e-05 
+interval = (fr(-10), fr(10))
+
+a = fr(9.57496)
+b = fr(-243.672)
+c = fr(773.65)
 
 def validity_check(y):
     if(y.degree() < 2):
@@ -20,16 +28,10 @@ def dalambert_criterion(coefficients):
     else:
         return True  # Полином может иметь комплексные корни
 
-def get_condition_init():
-    interval = (-10, 10)
-
-    a = fr(9.57496)
-    b = fr(-243.672)
-    c = fr(773.65)
-
-    y = Poly(x ** 3 + a * x ** 2 + b * x + c)
+def get_initial_values():
+    y = x ** 3 + a * x ** 2 + b * x + c
    
-    validity_check()
+    validity_check(Poly(y))
 
     return (y, interval)
 
