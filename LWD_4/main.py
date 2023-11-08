@@ -1,5 +1,4 @@
 from iteration_method import *
-import tests
 import task
 from newton_method import *
 import numpy as np
