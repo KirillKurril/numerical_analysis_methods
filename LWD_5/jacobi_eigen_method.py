@@ -12,11 +12,11 @@ def find_eigen(matrix, tol, verbose=0):
 
     A = matrix.copy()
     n = A.shape[0]
-    rotate_matrix = np.eye(n)  # diagonal matrix
-    eig_vec = np.zeros(shape=A.shape)
+    rotate_matrix = np.eye(n)  #создает единичную матрицу
+    eig_vec = np.zeros(shape=A.shape) #создает пустой вектор ответов 
     iteration = 0
     while calc_non_diag(A) > tol:
-
+        print("iteration")
         if verbose == 1:
             print(f'Frobenius norm: {frobenius_norm(A):.4f}')
         off_A = off(A)
@@ -30,7 +30,6 @@ def find_eigen(matrix, tol, verbose=0):
         else:
             teta = np.arctan((2 * max_el) / (A[p, p] - A[q, q])) / 2
 
-        # fill rotate matrix
         for i in range(n):
             for j in range(n):
                 if i == j and i == p:
