@@ -16,7 +16,6 @@ def find_eigen(matrix, tol, verbose=0):
     eig_vec = np.zeros(shape=A.shape) #создает пустой вектор ответов 
     iteration = 0
     while calc_non_diag(A) > tol:
-        print("iteration")
         if verbose == 1:
             print(f'Frobenius norm: {frobenius_norm(A):.4f}')
         off_A = off(A)

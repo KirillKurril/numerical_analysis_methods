@@ -10,7 +10,7 @@ def print_array(matrix, msg="", sep='\n'):
     if len(matrix.shape) == 2:
         for i in range(n):
             for j in range(m):
-                print('{:>8.5f}'.format(matrix[i, j]), end='')
+                print('{:>8.6f}'.format(matrix[i, j]), end='')
             print(sep, end='')
 
     elif len(matrix.shape) == 1:

@@ -1,26 +1,29 @@
 import numpy as np
 from jacobi_eigen_method import find_eigen
 from staff import print_array, is_matrix_symmetric
+from jacobi_staff import check_equal_dim
 import task
 import test
 
 E = task.E
-A = test.A_1
+A = task.A
+
+if not check_equal_dim(A):
+        raise ValueError("Matrix isn't square")
 
 if not is_matrix_symmetric(A, 0.000001):
-    print("Matrix not symmetric")
-    exit(0)
+    raise ValueError("Matrix isn't symmetrice")
 
-if np.linalg.det(A) == 0:
-    print("Matrix is degenerate")
-    exit(0)
+if np.linalg.det(A) == 0: #вырожденные
+    raise ValueError("Matrix is degenerate")
 
 eig_val, eig_vec, steps = find_eigen(A, E, 0)
 
-print_array(A, 'Default Matrix:')
-print_array(eig_val, '\nMatrix of Eigenvalues:')
-print_array(eig_val @ np.ones(shape=(eig_val.shape[0], )), 'Eigenvalues:') 
-print_array(eig_vec, 'Eigenvectors:')
+print(f'Default Matrix:\n{A}')
+
+print(f'\nMatrix of Eigenvalues:\n{eig_val}')
+print(f'Eigenvalues:\n{eig_val @ np.ones(shape=(eig_val.shape[0], ))}') 
+print(f'Eigenvectors:\n{eig_vec}')
 
 
 print("\nVerification:")
