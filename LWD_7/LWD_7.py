@@ -2,9 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def input_func():
-    def f(x): return np.sinh(x)
+    def f(x): return np.sin(x)
 
-    left_border, dots_count, right_border = 0, 6, 2
+    left_border, dots_count, right_border = 0, 1000, 3*np.pi
 
     dots = []
     for i in range(dots_count):
@@ -63,11 +63,6 @@ def spline_built(dots):
     for i in range(1, n):
         F += [3 * ((y[i + 1] - y[i]) / h[i + 1] - (y[i] - y[i - 1]) / h[i])]
 
-    for i in range(n):
-        print(A[i])
-    print()
-    print(F)
-
 
     A = [A[i][1:] for i in range(len(A)) if i]
 
@@ -93,7 +88,7 @@ def spline_built(dots):
             #val = 0
             b = (y[i] - y[i - 1]) / h[i] + (2 * c[i] + c[i - 1]) * h[i] / 3
             d = (c[i] - c[i - 1]) / (3 * h[i])
-            print(x[i - 1], x[i], "->")
+            print(f"Interval ({x[i - 1]}, {x[i]})\n")
             print(np.poly1d([d, c[i], b, y[i]]), '\n')
 
     return evaluate, output
@@ -111,17 +106,19 @@ plt.plot(x, y, 'og')
 x_plot = np.linspace(min(x), max(x), plot_dots)
 
 y_plot = [f(xdot) for xdot in x_plot]
-plt.plot(x_plot, y_plot)
+plt.plot(x_plot, y_plot, 'r')
 
 spl, output = spline_built(dots)
 y_plot = [spl(xdot) for xdot in x_plot]
-plt.plot(x_plot, y_plot)
+plt.plot(x_plot, y_plot, 'b')
 
 output()
 
-xdot = 1.0
-print(f"          f({xdot}) =", f(xdot))
+xdot = 0.7645
+print(f"f({xdot}) =", f(xdot))
 print(f"Cubic Spline({xdot}) =", spl(xdot))
-print(f"      delta({xdot}) =", abs(f(xdot) - spl(xdot)))
+print(f"delta({xdot}) =", abs(f(xdot) - spl(xdot)))
 
+
+plt.grid(True)
 plt.show()
