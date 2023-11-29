@@ -20,9 +20,9 @@ def frobenius_norm(matrix):
     return f_norm
 
 
-def off(matrix):
-    if not check_equal_dim(matrix):
-        raise ValueError("Matrix isn't n, n dimension")
+def off(matrix):                                        #Вычисляет сумму квадратов элементов
+    if not check_equal_dim(matrix):                     #на главной диагонали матрицы и вычитает
+        raise ValueError("Matrix isn't n, n dimension") #эту сумму из квадрата нормы Фробениуса матрицы.
 
     n = matrix.shape[0]
     trace_sum = 0
@@ -33,8 +33,8 @@ def off(matrix):
     return off_res
 
 
-def calc_non_diag(matrix):
-    if not check_equal_dim(matrix):
+def calc_non_diag(matrix):                              #Считает сумму модулей всех элементов 
+    if not check_equal_dim(matrix):                     #матрицы кроме диагональных элементов
         raise ValueError("Matrix isn't n, n dimension")
 
     n = matrix.shape[0]
@@ -47,7 +47,7 @@ def calc_non_diag(matrix):
     return sum_n_diag
 
 
-def max_no_diag(matrix):
+def max_no_diag(matrix): #находит максимальный по модулю элемент в верхнем трекгольнике матрицы
     if not check_equal_dim(matrix):
         raise ValueError("Matrix isn't n, n dimension")
 
