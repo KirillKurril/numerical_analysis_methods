@@ -4,8 +4,8 @@ import numpy as np
 
 
 h, T, Y_Adams3, Y_exact, error = evaluate(2)
-pyplot.title('Green - exact; Blue - Adams3')
-pyplot.plot(T, Y_exact, 'g--')
+pyplot.title('Red - exact; Blue - Adams')
+pyplot.plot(T, Y_exact, 'r')
 pyplot.plot(T, Y_Adams3, 'b')
 pyplot.show()
 

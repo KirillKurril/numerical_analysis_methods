@@ -2,9 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def input_func():
-    def f(x): return np.sin(x)
+    def f(x): return np.sinh(x)
 
-    left_border, dots_count, right_border = 0, 1000, 3*np.pi
+    left_border, dots_count, right_border = 0, 6, 2
 
     dots = []
     for i in range(dots_count):

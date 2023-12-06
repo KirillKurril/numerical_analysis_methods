@@ -2,8 +2,8 @@ import numpy as np
 from scipy import integrate
 
 a, b, Y0, eps = 0, 1, np.array([0]), 0.001
-c = 0.9
-m = 2.0
+c = 1.3
+m = 1.5
 
 
 def evaluate(h):
@@ -41,7 +41,7 @@ def rungekutta(T):
             raise RuntimeError("Нельзя интегрировать")
     return Y[:, 0]
 
-
+#второго порядка 
 def adams(T, h):
     Y = np.zeros((len(T) + 2, 1))
     result = np.zeros((len(T), 1))
